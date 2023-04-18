@@ -1,11 +1,19 @@
 const { typescript } = require('projen');
+const { NpmAccess } = require('projen/lib/javascript');
+
+const deps = ['quicktype-core'];
+const devDeps = ['@types/json5', '@types/js-yaml', 'json5', 'js-yaml', '@types/readable-stream'];
+
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
+  authorName: 'Dmytro Kosiachenko',
   name: 'projen-type-generator',
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  license: 'MIT',
+  peerDeps: ['projen'],
+  deps: deps,
+  devDeps: devDeps,
+  npmAccess: NpmAccess.PUBLIC,
+  releaseToNpm: true,
+  description: 'Generates typescript interfaces from json or yaml files.',
 });
 project.synth();
