@@ -14,7 +14,10 @@ export class TypeGenerator extends AutoDiscoverBase {
       console.info(`processing file: ${filePath}`);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const inputData = this.getInputData(fileContents, filePath);
-      await this.quicktypeJSON(inputData.kind, inputData.contents);
+      const result = await this.quicktypeJSON(inputData.kind, inputData.contents);
+      console.info(`Result:` + JSON.stringify(result));
+
+      fs.writeFileSync('test.ts', JSON.stringify(result));
     });
   }
 
