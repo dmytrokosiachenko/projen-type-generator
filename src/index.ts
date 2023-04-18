@@ -44,6 +44,6 @@ export class File2Type extends AutoDiscoverBase {
         return { kind: 'yaml', name: 'input', contents: fileContents };
       default:
         throw new Error(`Unknown file extension: ${extension}`);
-    }
+    } 
   }
 }
