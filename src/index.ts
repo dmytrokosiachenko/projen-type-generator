@@ -4,6 +4,8 @@ import { AutoDiscoverBase, AutoDiscoverBaseOptions } from 'projen/lib/cdk';
 import { InputData, jsonInputForTargetLanguage, quicktype } from 'quicktype-core';
 
 export class TypeGenerator extends AutoDiscoverBase {
+  private readonly LANGUAGE = 'typescript';
+
   constructor(project: AwsCdkTypeScriptApp, projectOptions: AutoDiscoverBaseOptions) {
     super(project, {
       extension: projectOptions.extension,
@@ -14,15 +16,15 @@ export class TypeGenerator extends AutoDiscoverBase {
       console.info(`processing file: ${filePath}`);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const inputData = this.getInputData(fileContents, filePath);
-      const result = await this.quicktypeJSON(inputData.kind, inputData.contents);
-      console.info('Result:' + JSON.stringify(result));
-
-      fs.writeFileSync('test.ts', JSON.stringify(result));
+      const { lines: lines } = await this.quicktypeJSON(inputData.kind, inputData.contents);
+      lines.join('\n');
+      console.info('Result:' + JSON.stringify(lines));
+      fs.writeFileSync('test.ts', JSON.stringify(lines));
     });
   }
 
   private async quicktypeJSON(typeName: string, jsonString: string) {
-    const jsonInput = jsonInputForTargetLanguage('ts');
+    const jsonInput = jsonInputForTargetLanguage(this.LANGUAGE);
     await jsonInput.addSource({
       name: typeName,
       samples: [jsonString],
@@ -33,7 +35,7 @@ export class TypeGenerator extends AutoDiscoverBase {
 
     return quicktype({
       inputData,
-      lang: 'ts',
+      lang: this.LANGUAGE,
     });
   }
 
