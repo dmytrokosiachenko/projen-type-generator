@@ -15,7 +15,7 @@ export class TypeGenerator extends AutoDiscoverBase {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const inputData = this.getInputData(fileContents, filePath);
       const result = await this.quicktypeJSON(inputData.kind, inputData.contents);
-      console.info(`Result:` + JSON.stringify(result));
+      console.info('Result:' + JSON.stringify(result));
 
       fs.writeFileSync('test.ts', JSON.stringify(result));
     });
