@@ -3,14 +3,15 @@ import { AwsCdkTypeScriptApp } from 'projen/lib/awscdk';
 import { AutoDiscoverBase, AutoDiscoverBaseOptions } from 'projen/lib/cdk';
 import { InputData, jsonInputForTargetLanguage, quicktype } from 'quicktype-core';
 
-export interface Files2TypeOptions extends AutoDiscoverBaseOptions {
+export interface TypeGeneratorOptions extends AutoDiscoverBaseOptions {
   files: string[];
 }
 
-export class File2Type extends AutoDiscoverBase {
-  constructor(project: AwsCdkTypeScriptApp, projectOptions: Files2TypeOptions) {
+export class TypeGenerator extends AutoDiscoverBase {
+  constructor(project: AwsCdkTypeScriptApp, projectOptions: TypeGeneratorOptions) {
     super(project, projectOptions);
     projectOptions.files.forEach(async filePath => {
+      console.info(`processing file: ${filePath}`);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const inputData = this.getInputData(fileContents, filePath);
       await this.quicktypeJSON(inputData.kind, inputData.contents);
@@ -44,6 +45,6 @@ export class File2Type extends AutoDiscoverBase {
         return { kind: 'yaml', name: 'input', contents: fileContents };
       default:
         throw new Error(`Unknown file extension: ${extension}`);
-    } 
+    }
   }
 }
