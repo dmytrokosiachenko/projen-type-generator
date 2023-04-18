@@ -3,14 +3,14 @@ import { AwsCdkTypeScriptApp } from 'projen/lib/awscdk';
 import { AutoDiscoverBase, AutoDiscoverBaseOptions } from 'projen/lib/cdk';
 import { InputData, jsonInputForTargetLanguage, quicktype } from 'quicktype-core';
 
-export interface TypeGeneratorOptions extends AutoDiscoverBaseOptions {
-  files: string[];
-}
-
 export class TypeGenerator extends AutoDiscoverBase {
-  constructor(project: AwsCdkTypeScriptApp, projectOptions: TypeGeneratorOptions) {
-    super(project, projectOptions);
-    projectOptions.files.forEach(async filePath => {
+  constructor(project: AwsCdkTypeScriptApp, projectOptions: AutoDiscoverBaseOptions) {
+    super(project, {
+      extension: projectOptions.extension,
+      projectdir: project.srcdir,
+    });
+
+    this.entrypoints.forEach(async filePath => {
       console.info(`processing file: ${filePath}`);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const inputData = this.getInputData(fileContents, filePath);
