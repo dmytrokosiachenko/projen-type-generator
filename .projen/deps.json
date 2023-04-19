@@ -5,20 +5,8 @@
       "type": "build"
     },
     {
-      "name": "@types/js-yaml",
-      "type": "build"
-    },
-    {
-      "name": "@types/json5",
-      "type": "build"
-    },
-    {
       "name": "@types/node",
       "version": "^16",
-      "type": "build"
-    },
-    {
-      "name": "@types/readable-stream",
       "type": "build"
     },
     {
@@ -58,20 +46,8 @@
       "type": "build"
     },
     {
-      "name": "js-yaml",
-      "type": "build"
-    },
-    {
-      "name": "json5",
-      "type": "build"
-    },
-    {
       "name": "npm-check-updates",
       "version": "^16",
-      "type": "build"
-    },
-    {
-      "name": "prettier",
       "type": "build"
     },
     {
@@ -94,6 +70,10 @@
     {
       "name": "projen",
       "type": "peer"
+    },
+    {
+      "name": "@types/js-yaml",
+      "type": "runtime"
     },
     {
       "name": "js-yaml",

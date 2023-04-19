@@ -48,7 +48,6 @@ export class TypeGenerator extends AutoDiscoverBase {
     await jsonInput.addSource({
       name: fileName,
       samples: [inputContent],
-      description: "Generated file"
     });
     const inputData = new InputData();
     inputData.addInput(jsonInput);
