@@ -1,55 +1,53 @@
 import * as fs from 'fs';
+import * as path from 'path';
+import yaml from 'js-yaml';
+import JsonToTS from 'json-to-ts';
 import { AwsCdkTypeScriptApp } from 'projen/lib/awscdk';
 import { AutoDiscoverBase, AutoDiscoverBaseOptions } from 'projen/lib/cdk';
-import { InputData, jsonInputForTargetLanguage, quicktype } from 'quicktype-core';
 
 export class TypeGenerator extends AutoDiscoverBase {
-  private readonly LANGUAGE = 'typescript';
-
   constructor(project: AwsCdkTypeScriptApp, projectOptions: AutoDiscoverBaseOptions) {
     super(project, {
       extension: projectOptions.extension,
       projectdir: project.srcdir,
     });
-
-    this.entrypoints.forEach(async filePath => {
-      console.info(`processing file: ${filePath}`);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const inputData = this.getInputData(fileContents, filePath);
-      const { lines: lines } = await this.quicktypeJSON(inputData.kind, inputData.contents);
-      lines.join('\n');
-      console.info('Result:' + JSON.stringify(lines));
-      fs.writeFileSync('test.ts', JSON.stringify(lines));
-    });
+    this.generateTypes();
   }
 
-  private async quicktypeJSON(typeName: string, jsonString: string) {
-    const jsonInput = jsonInputForTargetLanguage(this.LANGUAGE);
-    await jsonInput.addSource({
-      name: typeName,
-      samples: [jsonString],
-    });
-
-    const inputData = new InputData();
-    inputData.addInput(jsonInput);
-
-    return quicktype({
-      inputData,
-      lang: this.LANGUAGE,
-    });
+  generateTypes() {
+    for (const filePath of this.entrypoints) {
+      try {
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const { content, fileExtension } = this.convert(fileContents, filePath);
+        const generatedFileName = path.basename(filePath, fileExtension) + '.generated.ts';
+        const generatedFilePath = path.join(path.dirname(filePath), generatedFileName);
+        this.writeFile(generatedFilePath, content);
+      } catch (error) {
+        console.error(`Error processing file: ${filePath}`);
+        console.error(error);
+        throw error;
+      }
+    }
   }
 
-  private getInputData(fileContents: string, filePath: string) {
-    const extension = filePath.split('.').pop()?.toLowerCase();
-
+  convert(fileContents: string, filePath: string): { content: string[]; fileExtension: string } {
+    const extension = path.extname(filePath).toLowerCase();
     switch (extension) {
-      case 'json':
-        return { kind: 'json', name: 'input', contents: fileContents };
-      case 'yaml':
-      case 'yml':
-        return { kind: 'yaml', name: 'input', contents: fileContents };
+      case '.json':
+        return { content: JsonToTS(JSON.parse(fileContents)), fileExtension: extension };
+      case '.yaml':
+      case '.yml':
+        const jsonContent = yaml.load(fileContents) as string;
+        return { content: JsonToTS(jsonContent), fileExtension: extension };
       default:
         throw new Error(`Unknown file extension: ${extension}`);
     }
+  }
+
+  writeFile(filePath: string, lines: string[]): void {
+    const fileContents = lines.join('\n');
+    const outputFilePath = path.join(path.dirname(filePath), `${path.basename(filePath, path.extname(filePath))}.d.ts`);
+    fs.writeFileSync(outputFilePath, fileContents, 'utf8');
+    console.info(`Generated types for file: ${filePath}`);
   }
 }

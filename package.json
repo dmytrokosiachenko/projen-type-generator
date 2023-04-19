@@ -42,16 +42,18 @@
     "js-yaml": "^4.1.0",
     "json5": "^2.2.3",
     "npm-check-updates": "^16",
-    "projen": "^0.71.16",
+    "prettier": "^2.8.7",
+    "projen": "^0.71.17",
     "standard-version": "^9",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "projen": "^0.71.16"
+    "projen": "^0.71.17"
   },
   "dependencies": {
-    "quicktype-core": "^23.0.19"
+    "js-yaml": "^4.1.0",
+    "json-to-ts": "^1.7.0"
   },
   "main": "lib/index.js",
   "license": "MIT",

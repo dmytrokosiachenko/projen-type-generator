@@ -1,8 +1,8 @@
 const { typescript } = require('projen');
 const { NpmAccess } = require('projen/lib/javascript');
 
-const deps = ['quicktype-core'];
-const devDeps = ['@types/json5', '@types/js-yaml', 'json5', 'js-yaml', '@types/readable-stream'];
+const deps = ['json-to-ts', 'js-yaml'];
+const devDeps = ['@types/json5', '@types/js-yaml', 'json5', 'js-yaml', '@types/readable-stream', 'prettier'];
 
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
