@@ -15,5 +15,10 @@ const project = new typescript.TypeScriptProject({
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   description: 'Generates typescript interfaces from json or yaml files.',
+  gitignore: [
+    '.vscode/* ',
+  ],
+
+
 });
 project.synth();

@@ -19,7 +19,7 @@ export class TypeGenerator extends AutoDiscoverBase {
       try {
         const fileContents = fs.readFileSync(filePath, 'utf8');
         const { content, fileExtension } = this.convert(fileContents, filePath);
-        const generatedFileName = path.basename(filePath, fileExtension) + '.generated.ts';
+        const generatedFileName = path.basename(filePath, fileExtension) + '.ts';
         const generatedFilePath = path.join(path.dirname(filePath), generatedFileName);
         this.writeFile(generatedFilePath, content);
       } catch (error) {
