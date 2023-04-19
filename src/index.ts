@@ -34,7 +34,7 @@ export class TypeGenerator extends AutoDiscoverBase {
 
   async convert(fileContents: string, filePath: string): Promise<{ content: string[]; fileExtension: string }> {
     const extension = path.extname(filePath).toLowerCase();
-    const fileName = path.basename(filePath, extension);
+    const fileName = path.basename(filePath, extension).split('.')[0];
     let inputContent;
     if (extension === '.yaml' || extension === '.yml') {
       inputContent = JSON.stringify(yaml.load(fileContents) as string);
@@ -48,6 +48,7 @@ export class TypeGenerator extends AutoDiscoverBase {
     await jsonInput.addSource({
       name: fileName,
       samples: [inputContent],
+      description: "Generated file"
     });
     const inputData = new InputData();
     inputData.addInput(jsonInput);
@@ -57,7 +58,7 @@ export class TypeGenerator extends AutoDiscoverBase {
 
   writeFile(filePath: string, lines: string[]): void {
     const fileContents = lines.join('\n');
-    const outputFilePath = path.join(path.dirname(filePath), `${path.basename(filePath, path.extname(filePath))}.d.ts`);
+    const outputFilePath = path.join(path.dirname(filePath), `${path.basename(filePath, path.extname(filePath))}.ts`);
     fs.writeFileSync(outputFilePath, fileContents, 'utf8');
     console.info(`Generated types for file: ${filePath}`);
   }
