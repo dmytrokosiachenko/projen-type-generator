@@ -100,7 +100,7 @@
       "type": "runtime"
     },
     {
-      "name": "json-to-ts",
+      "name": "quicktype-core",
       "type": "runtime"
     }
   ],
