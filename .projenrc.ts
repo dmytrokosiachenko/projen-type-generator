@@ -1,7 +1,7 @@
-const { typescript } = require('projen');
-const { NpmAccess } = require('projen/lib/javascript');
+import { typescript } from 'projen';
+import { NpmAccess } from 'projen/lib/javascript';
 
-const deps = ['quicktype-core', 'js-yaml', '@types/js-yaml'];
+const deps = ['quicktype-core', 'js-yaml', '@types/js-yaml', 'readable-stream', '@types/readable-stream'];
 
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
@@ -13,11 +13,8 @@ const project = new typescript.TypeScriptProject({
   deps: deps,
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
-  description: 'Generates typescript interfaces from json or yaml files.',
-
-  gitignore: [
-    '.vscode/* ',
-  ],
+  projenrcTs: true,
+  gitignore: ['.vscode/* '],
 });
 
 project.synth();
