@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import yaml from 'js-yaml';
-import { AwsCdkTypeScriptApp } from 'projen/lib/awscdk';
+import { load } from 'js-yaml';
+import { AwsCdkConstructLibrary, AwsCdkTypeScriptApp } from 'projen/lib/awscdk';
 import { AutoDiscoverBase, AutoDiscoverBaseOptions } from 'projen/lib/cdk';
 import { InputData, TypeScriptTargetLanguage, jsonInputForTargetLanguage, quicktype } from 'quicktype-core';
 
 export class TypeGenerator extends AutoDiscoverBase {
-  constructor(project: AwsCdkTypeScriptApp, projectOptions: AutoDiscoverBaseOptions) {
+  constructor(project: AwsCdkTypeScriptApp | AwsCdkConstructLibrary, projectOptions: AutoDiscoverBaseOptions) {
     super(project, {
       extension: projectOptions.extension,
       projectdir: project.srcdir,
@@ -35,9 +35,9 @@ export class TypeGenerator extends AutoDiscoverBase {
   async convert(fileContents: string, filePath: string): Promise<{ content: string[]; fileExtension: string }> {
     const extension = path.extname(filePath).toLowerCase();
     const fileName = path.basename(filePath, extension).split('.')[0];
-    let inputContent;
+    let inputContent: string;
     if (extension === '.yaml' || extension === '.yml') {
-      inputContent = JSON.stringify(yaml.load(fileContents) as string);
+      inputContent = JSON.stringify(load(fileContents) as string);
     } else if (extension === '.json') {
       inputContent = fileContents;
     } else {
