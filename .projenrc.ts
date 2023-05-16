@@ -1,19 +1,18 @@
-import { awscdk } from 'projen';
+import { typescript } from 'projen';
 import { NpmAccess } from 'projen/lib/javascript';
 
-const deps = ['@types/js-yaml@^4.0.5', 'quicktype-core', 'js-yaml', 'readable-stream', '@types/readable-stream'];
+const deps = ['quicktype-core', 'js-yaml', 'readable-stream'];
+const devDeps = ['@types/js-yaml@^4.0.5', '@types/readable-stream'];
 
-const project = new awscdk.AwsCdkConstructLibrary({
+const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
-  author: 'Dmytro Kosiachenko',
-  authorAddress: 'dmytro.kosiachenko@gmail.com',
   description: 'Generates typescript interfaces out of JSON or YAML files in projen.',
-  repositoryUrl: 'https://github.com/dmytrokosiachenko/projen-type-generator.git',
-  cdkVersion: '2.79.1',
+  keywords: ['awscdk', 'cdk', 'AWS Step Functions'],
   name: 'projen-type-generator',
-  license: 'MIT',
   peerDeps: ['projen'],
   deps: deps,
+  devDeps: devDeps,
+  bundledDeps: ['js-yaml'],
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   projenrcTs: true,

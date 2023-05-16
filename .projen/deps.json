@@ -2,12 +2,20 @@
   "dependencies": [
     {
       "name": "@types/jest",
-      "version": "^27",
+      "type": "build"
+    },
+    {
+      "name": "@types/js-yaml",
+      "version": "^4.0.5",
       "type": "build"
     },
     {
       "name": "@types/node",
       "version": "^16",
+      "type": "build"
+    },
+    {
+      "name": "@types/readable-stream",
       "type": "build"
     },
     {
@@ -18,16 +26,6 @@
     {
       "name": "@typescript-eslint/parser",
       "version": "^5",
-      "type": "build"
-    },
-    {
-      "name": "aws-cdk-lib",
-      "version": "2.79.1",
-      "type": "build"
-    },
-    {
-      "name": "constructs",
-      "version": "10.0.5",
       "type": "build"
     },
     {
@@ -48,30 +46,12 @@
       "type": "build"
     },
     {
+      "name": "jest",
+      "type": "build"
+    },
+    {
       "name": "jest-junit",
       "version": "^15",
-      "type": "build"
-    },
-    {
-      "name": "jest",
-      "version": "^27",
-      "type": "build"
-    },
-    {
-      "name": "jsii-diff",
-      "type": "build"
-    },
-    {
-      "name": "jsii-docgen",
-      "type": "build"
-    },
-    {
-      "name": "jsii-pacmak",
-      "type": "build"
-    },
-    {
-      "name": "jsii",
-      "version": "1.x",
       "type": "build"
     },
     {
@@ -90,7 +70,6 @@
     },
     {
       "name": "ts-jest",
-      "version": "^27",
       "type": "build"
     },
     {
@@ -102,37 +81,12 @@
       "type": "build"
     },
     {
-      "name": "@types/babel__traverse",
-      "version": "7.18.2",
-      "type": "override"
-    },
-    {
-      "name": "@types/prettier",
-      "version": "2.6.0",
-      "type": "override"
-    },
-    {
-      "name": "aws-cdk-lib",
-      "version": "^2.79.1",
-      "type": "peer"
-    },
-    {
-      "name": "constructs",
-      "version": "^10.0.5",
-      "type": "peer"
+      "name": "js-yaml",
+      "type": "bundled"
     },
     {
       "name": "projen",
       "type": "peer"
-    },
-    {
-      "name": "@types/js-yaml",
-      "version": "^4.0.5",
-      "type": "runtime"
-    },
-    {
-      "name": "@types/readable-stream",
-      "type": "runtime"
     },
     {
       "name": "js-yaml",
