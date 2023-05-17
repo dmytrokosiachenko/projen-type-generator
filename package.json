@@ -35,25 +35,24 @@
     "jest": "^27",
     "jest-junit": "^15",
     "npm-check-updates": "^16",
-    "projen": "0.71.57",
+    "projen": "0.71.58",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "projen": "^0.71.57"
+    "projen": "^0.71.58"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
-    "quicktype-core": "^23.0.30",
+    "quicktype-core": "^23.0.32",
     "readable-stream": "^4.4.0"
   },
   "bundledDependencies": [
     "js-yaml"
   ],
   "keywords": [
-    "AWS Step Functions",
     "awscdk",
     "cdk"
   ],
