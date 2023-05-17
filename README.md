@@ -42,7 +42,3 @@ npx projen
 
 the TypeGenerator will automatically search for input files with the specified extension in the src directory, generate TypeScript types for each file, and save the generated TypeScript files in the same directory as the input files.
 For example, if the input file is named config.generate.yaml, the generated TypeScript type file will be named config.generate.ts.
-
-## Contributing
-
-This project is open for contributions! Feel free to submit a pull request or create an issue if you find any bugs or have any suggestions for improvement.
