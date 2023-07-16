@@ -35,18 +35,18 @@
     "jest": "^27",
     "jest-junit": "^15",
     "npm-check-updates": "^16",
-    "projen": "0.71.128",
+    "projen": "0.71.137",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "projen": "^0.71.128"
+    "projen": "^0.71.137"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
-    "quicktype-core": "^23.0.54",
+    "quicktype-core": "^23.0.59",
     "readable-stream": "^4.4.2"
   },
   "bundledDependencies": [
