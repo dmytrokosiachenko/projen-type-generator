@@ -24,30 +24,29 @@
   "devDependencies": {
     "@types/jest": "^27",
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^16",
+    "@types/node": "^18",
     "@types/readable-stream": "^2.3.15",
-    "@typescript-eslint/eslint-plugin": "^5",
-    "@typescript-eslint/parser": "^5",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "commit-and-tag-version": "^12",
+    "constructs": "^10.0.0",
     "eslint": "^8",
-    "eslint-import-resolver-node": "^0.3.7",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.29.1",
     "jest": "^27",
     "jest-junit": "^15",
-    "npm-check-updates": "^16",
-    "projen": "0.71.146",
-    "standard-version": "^9",
+    "projen": "0.86.6",
     "ts-jest": "^27",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
-    "projen": "^0.71.146"
+    "projen": "^0.86.6"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
-    "quicktype-core": "^23.0.59",
-    "readable-stream": "^4.4.2"
+    "quicktype-core": "^23.0.170",
+    "readable-stream": "^4.5.2"
   },
   "bundledDependencies": [
     "js-yaml"
@@ -58,11 +57,17 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0",
   "jest": {
+    "coverageProvider": "v8",
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.ts?(x)",
-      "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)"
+      "<rootDir>/@(src|test)/**/*(*.)@(spec|test).ts?(x)",
+      "<rootDir>/@(src|test)/**/__tests__/**/*.ts?(x)",
+      "<rootDir>/@(projenrc)/**/*(*.)@(spec|test).ts?(x)",
+      "<rootDir>/@(projenrc)/**/__tests__/**/*.ts?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
